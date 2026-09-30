@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Robo Financial Advisor</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/robo-advisor.css"></head>
+<body><div class="app">
+<header class="top"><a class="back" href="index.html" aria-label="Ganti profil uji">‹ Profil</a>
+ <div><h1>Robo Advisor</h1><small>Asisten portofolio berbasis AI</small></div>
+ <span class="badge" id="badge">…</span><button class="icon" id="chartBtn">Grafik</button></header>
+<div class="msgs" id="msgs" aria-live="polite"></div>
+<div class="tray" id="tray" hidden></div>
+<div class="quick" id="quick" hidden></div>
+<div class="composer"><input id="input" type="text" maxlength="1000" placeholder="Ketik jawaban atau pertanyaan…" autocomplete="off"><button id="send">Kirim</button></div>
+<p class="foot">Data simulasi. Bukan jaminan hasil atau nasihat investasi personal.</p>
+<div class="sheet" id="chartSheet" hidden><div><button class="icon x" data-close>Tutup</button><h2>Efficient Frontier</h2><div class="chartbox"><canvas id="frontier"></canvas></div></div></div>
+<div class="sheet" id="buySheet" hidden><div id="buyBody"></div></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="js/robo-advisor.js"></script></body></html>

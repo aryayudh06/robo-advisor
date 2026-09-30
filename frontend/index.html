@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Robo Financial Advisor</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/robo-advisor.css"></head>
+<body><main class="app start">
+<h1>Robo Financial Advisor</h1>
+<p>Mode uji: pilih profil risiko pengguna, lalu masuk ke chat.</p>
+<div id="list" role="radiogroup" aria-label="Profil risiko"></div>
+<button class="primary" id="go">Masuk ke chat</button>
+</main>
+<script>
+const PROFILES=["Konservatif","Moderat","Agresif"];let sel="Moderat";
+const pct=x=>(x*100).toFixed(1)+"%";
+(async()=>{const box=document.getElementById("list");
+ for(const p of PROFILES){const b=document.createElement("button");b.className="pf";b.setAttribute("role","radio");b.dataset.p=p;
+  let d={description:"",return_range:[0,0],risk_range:[0,0]};try{d=await (await fetch("/api/risk-profile?profile="+p)).json()}catch{}
+  b.innerHTML=`<b>${p}</b><span>${d.description}</span><span>Expected return ${pct(d.return_range[0])}–${pct(d.return_range[1])} · risiko ${pct(d.risk_range[0])}–${pct(d.risk_range[1])}</span>`;
+  b.onclick=()=>{sel=p;mark()};box.appendChild(b)}
+ mark()})();
+function mark(){document.querySelectorAll(".pf").forEach(b=>b.setAttribute("aria-checked",b.dataset.p===sel))}
+document.getElementById("go").onclick=()=>location.href="robo-advisor.html?profile="+encodeURIComponent(sel);
+</script></body></html>
